@@ -22,8 +22,8 @@
 	 xmlns="http://www.w3.org/2000/svg">
 <defs >
 	<linearGradient id="background" y1="0" y2="1" x1="0" x2="0" >
-		<stop stop-color="#eeeeee" offset="5%" />
-		<stop stop-color="#eeeeb0" offset="95%" />
+		<stop stop-color="#ddd" offset="5%" />
+		<stop stop-color="#ccc" offset="95%" />
 	</linearGradient>
 </defs>
 <style type="text/css">
@@ -51,7 +51,7 @@
 		border: 5px solid transparent;
 		border-top-color: rgba(0,0,0,0.8);
 	}
-	text { font-family:Verdana; fill:rgb(0,0,0); }
+	text { font-family:Inconsolata LGC; fill:rgb(0,0,0); }
 	.func_g:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
 </style>
 <text id="alt" x="10" y="50" fill="black" font-size="50">CG.svg is drawn dynamically. Please wait</text>

@@ -20,10 +20,11 @@ function percentage(samples, total) {
 }
 
 function calculateDiff(samples0, total0, samples1, total1) {
-    var p0 = percentage(samples0, total0);
-    var p1 = percentage(samples1, total1);
+    var total = samples0 + samples1;
+    var p0 = samples0/total;
+    var p1 = samples1/total;
     var diff =  p0 - p1;
-    return (diff < 0) ? diff / p1 : diff / p0;
+    return diff;
 }
 
 function MergedFGDraw(fg, collapsed, visualDiff, differentSides, _d) {
@@ -142,14 +143,10 @@ MergedFGDraw.prototype.drawFrame = function (colorScheme, f) {
         var diff =  calculateDiff(f.individualSamples[0], draw.collapsed.totalIndividualSamples[0], f.individualSamples[1], draw.collapsed.totalIndividualSamples[1]);
         var absDiff = Math.abs(diff);
         var diffW = w * absDiff;
-        if (diffW > 1 && absDiff > 0.1) {
+        if (diffW > 1) {
             var styleFunc = colorScheme.applyColor(f, draw.collapsed.totalIndividualSamples);
-            if (absDiff < 0.9) {
-                var diffX = (draw.differentSides && diff < 0) ? x + w - diffW : x;
-                var diffRect = drawRect(diffX, y, diffW, styleFunc);
-            } else {
-                styleFunc(frameRect);
-            }
+            var diffX = (draw.differentSides && diff < 0) ? x + w - diffW : x;
+            var diffRect = drawRect(diffX, y, diffW, styleFunc);
         }
     } else {
         frameRect = drawRect(x, y, w, colorScheme.applyColor(f, draw.collapsed.totalIndividualSamples));
@@ -202,7 +199,7 @@ function FG_Color_Diff() {
     this.colorsAsOverlays = true;
     this.legend = {
         red: 'Growth',
-        blue: 'Reduction'
+        green: 'Reduction'
     };
 }
 FG_Color_Diff.prototype = Object.create(FG_Color.prototype);
@@ -214,17 +211,8 @@ FG_Color_Diff.prototype.colorFor = function(frame, totalSamples) {
     if (diff === 0) {
         return "white";
     }
-    var variance = Math.floor(diff * diff * 255);
-    var r;
-    var b;
-    var g = 255 - variance;
     if (diff < 0) {
-        r = 255;
-        b = 255 - variance;
-    } else {
-        b = 255;
-        r = 255 - variance;
+        return "#faa";
     }
-
-    return "rgb(" + r + "," + g + "," + b + ")";
+    return "#afa";
 };

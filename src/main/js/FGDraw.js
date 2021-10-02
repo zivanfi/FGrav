@@ -63,7 +63,7 @@ FGDraw.prototype.drawCanvas = function() {
     this.fg.overlayBtn = this.d.getElementById("overlayBtn");
 
     if (this.d.styleSheets[0]) {
-        this.d.styleSheets[0].insertRule("text { font-family:Verdana; font-size:" + this.fg.fontSize + "px; fill:rgb(0,0,0); }", 0);
+        this.d.styleSheets[0].insertRule("text { font-family:Inconsolata LGC; font-size:" + this.fg.fontSize + "px; fill:rgb(0,0,0); }", 0);
     }
 };
 
